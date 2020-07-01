@@ -1,4 +1,6 @@
-package de.webprojekt.models;
+package de.webprojekt.dto;
+
+import de.webprojekt.models.User;
 
 import java.util.Date;
 
@@ -11,6 +13,15 @@ public class NewTodo {
     private Date deadline;
     private Date createdAt;
     private Date completedAt;
+    private String displayName;
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
 
     public Long getId() {
         return id;
@@ -68,11 +79,4 @@ public class NewTodo {
         this.completedAt = completedAt;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 }

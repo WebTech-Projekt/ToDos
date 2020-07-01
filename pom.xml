@@ -35,11 +35,7 @@
   <modules>
 
     <module>presentation</module>
-
-
     <module>business</module>
-
-
     <module>persistence</module>
 
   </modules>

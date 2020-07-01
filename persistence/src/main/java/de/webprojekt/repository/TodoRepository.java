@@ -13,4 +13,5 @@ import java.util.List;
 public interface TodoRepository extends JpaRepository<Todo, Long> {
     @Query("SELECT u FROM Todo u WHERE u.user = :x")
     List<Todo> findAllTodoByUser(@Param("x") User user);
+
 }

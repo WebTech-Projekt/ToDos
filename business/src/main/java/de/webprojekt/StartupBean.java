@@ -21,7 +21,7 @@ public class StartupBean implements ApplicationListener<ContextRefreshedEvent> {
 
   @Override
   public void onApplicationEvent(ContextRefreshedEvent event) {
-    final User firstUserItem = this.entityManager.find(User.class,1L);
+    final User firstUserItem = this.entityManager.find(User.class,"Muster");
     final Todo firstNoteItem = this.entityManager.find(Todo.class, 1L);
     // only initialize once
     Date dt = new Date();
