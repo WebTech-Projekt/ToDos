@@ -1,0 +1,3 @@
+post:
+	curl -i -H "Content-Type: application/json" -X POST
+	-d '{"NOM":"Dalton", "PRENOM":"joe", "NAISSANCE":"2000-08-15", "VILLE":"Orleans"}' http://localhost/silex/api/contact
