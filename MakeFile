@@ -1,0 +1,19 @@
+post:
+	curl -X POST localhost:8080/users \
+	-H 'Content-type:application/json' \
+	-d '{"displayName": "Samwise Gamgee", "userName": "gardener", "admin":false,"todo":[{"title":"todo2","content":"work"}]}'
+put:
+	curl -X PUT localhost:8080/users/Ian  \
+	-H 'Content-type:application/json' \
+	-d '{"displayName": "Ian", "userName": "Desire", "admin":true,""}'
+
+delete:
+ 	curl -X DELETE http://localhost:8080/todos/user/Ian
+patch:
+	curl -H 'Content-type:application/json' \
+	-X PATCH http://localhost:8080/users/Muster \
+	-d '{"userName":"Nestor Mermoz Thea"}'
+post2:
+	curl -X POST localhost:8080/todos \
+	-H 'Content-type:application/json' \
+	-d '{"title":"todo2","content":"work","done":"","user":{"displayName": "Ian", "userName": "Desire","passwordHash":null, "admin":false}}'
