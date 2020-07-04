@@ -1,10 +1,12 @@
-package de.webprojekt.rest;
+package de.webprojekt.rest.role;
 
-import de.webprojekt.models.Todo;
 import de.webprojekt.dto.NewTodo;
+import de.webprojekt.models.Todo;
 import de.webprojekt.models.User;
 import de.webprojekt.repository.TodoRepository;
 import de.webprojekt.repository.UserRepository;
+import de.webprojekt.rest.NotFoundException;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,10 +14,10 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 
-
 @Transactional
 @RestController
-@RequestMapping(path="/todos")
+@RequestMapping(path="/rest/todos")
+@RequiresRoles("admin")
 public class TodoRest {
     @Autowired
     private TodoRepository noteRepository;

@@ -1,9 +1,12 @@
-package de.webprojekt.rest;
+package de.webprojekt.rest.role;
 
 import de.webprojekt.models.Todo;
 import de.webprojekt.models.User;
 import de.webprojekt.repository.TodoRepository;
 import de.webprojekt.repository.UserRepository;
+import de.webprojekt.rest.NotFoundException;
+import org.apache.shiro.authz.annotation.Logical;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +17,8 @@ import javax.transaction.Transactional;
 
 @Transactional
 @RestController
-@RequestMapping(path="/users")
+@RequestMapping(path="/rest/users")
+
 public class UserRest {
     @Autowired
     private UserRepository userRepository;
@@ -29,16 +33,20 @@ public class UserRest {
         return ResponseEntity.ok("resource updated");
     }
 
+
     @GetMapping(path="")
     public @ResponseBody Iterable<User> getAllUsers() {
         return userRepository.findAll();
     }
 
+    @RequiresRoles(logical = Logical.OR, value = {"admin", "author"})
     @RequestMapping(value = "/{username}", method = RequestMethod.GET)
     public User getUserById(@PathVariable("username") String username) {
         return userRepository.findById(username)
                 .orElseThrow(() -> new NotFoundException(username));
     }
+
+    //@RequiresRoles(logical = Logical.OR, value = {"admin", "author"})
     @PutMapping(path="/{username}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -73,6 +81,7 @@ public class UserRest {
         });
         return ResponseEntity.ok("Die Aktualisierung ist erfolgreich abgeschlossen");
     }
+    @RequiresRoles("admin")
     @DeleteMapping("/{username}")
     public String deleteUser(@PathVariable("username") String username) {
        User user=getUserById(username);

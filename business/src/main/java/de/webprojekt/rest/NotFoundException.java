@@ -1,11 +1,11 @@
 package de.webprojekt.rest;
 
-class NotFoundException extends RuntimeException {
+public class NotFoundException extends RuntimeException {
 
-    NotFoundException(Long id) {
+    public NotFoundException(Long id) {
         super("Could not find todos/ " + id);
     }
-    NotFoundException(String id) {
+    public NotFoundException(String id) {
         super("Could not find users/ " + id);
     }
 }
