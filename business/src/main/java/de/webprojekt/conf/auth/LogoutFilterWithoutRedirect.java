@@ -1,9 +1,9 @@
 package de.webprojekt.conf.auth;
 
+import org.apache.shiro.web.filter.authc.LogoutFilter;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-
-import org.apache.shiro.web.filter.authc.LogoutFilter;
 
 public class LogoutFilterWithoutRedirect extends LogoutFilter {
 

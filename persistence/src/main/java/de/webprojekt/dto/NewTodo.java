@@ -13,14 +13,14 @@ public class NewTodo {
     private Date deadline;
     private Date createdAt;
     private Date completedAt;
-    private String displayName;
+    private String username;
 
-    public String getDisplayName() {
-        return displayName;
+    public String getUsername() {
+        return username;
     }
 
     public void setDisplayName(String displayName) {
-        this.displayName = displayName;
+        this.username = username;
     }
 
     public Long getId() {

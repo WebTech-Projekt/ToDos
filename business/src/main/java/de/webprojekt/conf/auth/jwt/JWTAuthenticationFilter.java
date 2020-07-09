@@ -1,20 +1,18 @@
 package de.webprojekt.conf.auth.jwt;
 
-import java.text.ParseException;
-
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.nimbusds.jose.JWSObject;
-import de.webprojekt.conf.auth.jwt.JWTShiroToken;
 import net.minidev.json.JSONObject;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.web.filter.authc.AuthenticatingFilter;
 import org.apache.shiro.web.util.WebUtils;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.text.ParseException;
 
 public class JWTAuthenticationFilter extends AuthenticatingFilter {
 
