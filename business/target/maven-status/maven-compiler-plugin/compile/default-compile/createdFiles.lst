@@ -1,4 +1,3 @@
-de/webprojekt/conf/auth/WT2Realm$1.class
 de/webprojekt/conf/auth/permission/ViewFirstFiveNewsItemsPermission.class
 de/webprojekt/conf/auth/jwt/JWTWT2Realm.class
 de/webprojekt/conf/auth/BasicAuthenticationFilterWithoutRedirect.class
@@ -12,7 +11,7 @@ de/webprojekt/auth/JWTREST.class
 de/webprojekt/StartupBean.class
 de/webprojekt/conf/auth/LogoutFilterWithoutRedirect.class
 de/webprojekt/conf/auth/permission/ReadNewsItemPermission.class
-de/webprojekt/conf/auth/WT2Realm.class
 de/webprojekt/rest/NotFoundException.class
 de/webprojekt/rest/UserRest.class
 de/webprojekt/conf/auth/FormAuthenticationFilterWithoutRedirect.class
+de/webprojekt/conf/auth/jwt/JWTWT2Realm$1.class

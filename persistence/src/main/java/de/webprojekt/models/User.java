@@ -10,74 +10,71 @@ import java.util.List;
 public class User {
   @Id
   @Column(length = 30)
-  private String displayName;
-  @Column(length = 100)
-  private String userName;
+  private String username;
   @Column(length = 70)
   @JsonIgnore
-  private byte[] passwordHash;
-  private boolean isAdmin;
+  private byte[] password;
+  private String role;
+  //private Collection<String> permissions;
   @OneToMany(mappedBy = "user",fetch= FetchType.LAZY)
   private Collection<Todo> todo;
 
   public User() {
-    this.displayName = "Test";
-  }
-  public User(String displayName) {
-    this.displayName = displayName;
+    this.username = "Test";
   }
 
-  public User(String displayName, String userName, boolean isAdmin) {
-    this.displayName = displayName;
-    this.userName = userName;
-    this.isAdmin = isAdmin;
+  public User(String username, byte[] password) {
+    this.username = username;
+    this.password = password;
   }
 
-  public User(String displayName, String userName, byte[] passwordHash, boolean isAdmin, Collection<Todo> todo) {
-    this.displayName = displayName;
-    this.userName = userName;
-    this.passwordHash = passwordHash;
-    this.isAdmin = isAdmin;
+  public User(String username, byte[] password, String role) {
+    this.username = username;
+    this.password = password;
+    this.role = role;
+  }
+
+  public User(String username, byte[] password, String role, Collection<Todo> todo) {
+    this.username = username;
+    this.password = password;
+    this.role = role;
     this.todo = todo;
   }
 
-  public String getDisplayName() {
-    return displayName;
+  public String getUsername() {
+    return username;
   }
 
-  public void setDisplayName(String displayName) {
-    this.displayName = displayName;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
-  public String getUserName() {
-    return userName;
+  public byte[] getPassword() {
+    return password;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setPassword(byte[] password) {
+    this.password = password;
   }
 
-  public byte[] getPasswordHash() {
-    return passwordHash;
+  public String getRole() {
+    return role;
   }
 
-  public void setPasswordHash(byte[] passwordHash) {
-    this.passwordHash = passwordHash;
+  public void setRole(String role) {
+    this.role = role;
   }
 
-  public boolean isAdmin() {
-    return isAdmin;
+  /*public Collection<String> getPermissions() {
+    return permissions;
   }
 
-  public void setAdmin(boolean admin) {
-    isAdmin = admin;
-  }
+  public void setPermissions(List<String> permissions) {
+    this.permissions = permissions;
+  }*/
 
   public Collection<Todo> getTodo() {
     return todo;
-  }
-  public Object[] getTodoObject() {
-    return todo.toArray();
   }
 
   public void setTodo(Collection<Todo> todo) {

@@ -1,21 +1,14 @@
 package de.webprojekt.conf.auth.jwt;
 
-import java.text.ParseException;
-import java.util.Date;
-import java.util.UUID;
-
-import com.nimbusds.jose.JOSEException;
-import com.nimbusds.jose.JWSAlgorithm;
-import com.nimbusds.jose.JWSHeader;
-import com.nimbusds.jose.JWSObject;
-import com.nimbusds.jose.JWSSigner;
-import com.nimbusds.jose.JWSVerifier;
-import com.nimbusds.jose.Payload;
+import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
 import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
-import de.webprojekt.conf.auth.jwt.JWTLoginData;
+
+import java.text.ParseException;
+import java.util.Date;
+import java.util.UUID;
 
 public class JWTUtil {
 
@@ -24,6 +17,7 @@ public class JWTUtil {
     public static String createJWToken(JWTLoginData credentials) throws JOSEException {
 
         final String user = credentials.getUsername();
+        final String password = credentials.getPassword();
 
         final JWTClaimsSet.Builder builder = new JWTClaimsSet.Builder();
 
@@ -31,11 +25,15 @@ public class JWTUtil {
         builder.subject(user);
         builder.issueTime(new Date());
         builder.jwtID(UUID.randomUUID().toString());
-
+        //System.out.println(credentials.getRole());
         // add a custom claim for admins
-        if ("admin".equals(user)) {
+        builder.claim(ROLES_CLAIM, credentials.getRole());
+        /*if ("admin".equals(credentials.getRole())) {
             builder.claim(ROLES_CLAIM, "admin");
         }
+        else{
+            builder.claim(ROLES_CLAIM, "author");
+        }*/
 
         final JWTClaimsSet claimsSet = builder.build();
 

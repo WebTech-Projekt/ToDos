@@ -1,11 +1,11 @@
 package de.webprojekt.conf.auth;
 
+import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
+import org.apache.shiro.web.util.WebUtils;
+
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
-import org.apache.shiro.web.util.WebUtils;
 
 public class BasicAuthenticationFilterWithoutRedirect extends BasicHttpAuthenticationFilter {
 

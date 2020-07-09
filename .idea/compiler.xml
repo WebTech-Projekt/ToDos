@@ -6,14 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="business" />
         <module name="presentation" />
         <module name="persistence" />
-      </profile>
-      <profile name="Annotation profile for ToDos" enabled="true">
-        <sourceOutputDir name="../presentation/target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../presentation/target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="business" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
