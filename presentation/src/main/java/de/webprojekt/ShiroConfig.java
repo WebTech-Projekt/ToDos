@@ -1,11 +1,10 @@
-package webprojekt;
+package de.webprojekt;
 
-import de.ls5.wt2.conf.auth.BasicAuthenticationFilterWithoutRedirect;
-import de.ls5.wt2.conf.auth.FormAuthenticationFilterWithoutRedirect;
-import de.ls5.wt2.conf.auth.LogoutFilterWithoutRedirect;
-import de.ls5.wt2.conf.auth.WT2Realm;
-import de.ls5.wt2.conf.auth.jwt.JWTAuthenticationFilter;
-import de.ls5.wt2.conf.auth.jwt.JWTWT2Realm;
+import de.webprojekt.conf.auth.BasicAuthenticationFilterWithoutRedirect;
+import de.webprojekt.conf.auth.FormAuthenticationFilterWithoutRedirect;
+import de.webprojekt.conf.auth.LogoutFilterWithoutRedirect;
+import de.webprojekt.conf.auth.jwt.JWTAuthenticationFilter;
+import de.webprojekt.conf.auth.jwt.JWTWT2Realm;
 import org.apache.shiro.realm.Realm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -19,11 +18,6 @@ import java.util.Map;
 
 @Configuration
 public class ShiroConfig {
-
-    @Bean
-    public Realm realm() {
-        return new WT2Realm();
-    }
 
     @Bean
     public Realm jwtRealm() {
@@ -51,18 +45,18 @@ public class ShiroConfig {
         final Map<String, String> chainDefinition = new LinkedHashMap<>();
 
         // configuration for stateless authentication on each request
-        chainDefinition.put("/rest/auth/basic/**", "noSessionCreation, restAuthenticator");
+        //chainDefinition.put("/rest/auth/basic/**", "noSessionCreation, restAuthenticator");
 
         // configuration for JWT based authentication
-        chainDefinition.put("/rest/auth/jwt/authenticate", "anon");
-        chainDefinition.put("/rest/auth/jwt/**", "noSessionCreation, jwtFilter");
+        chainDefinition.put("/rest/auth/authenticate", "anon");
+        chainDefinition.put("/rest/auth/**", "noSessionCreation, jwtFilter");
 
         // configuration for using session based authentication
-        chainDefinition.put("/login.jsp", "loginFilter");
-        chainDefinition.put("/logout", "logoutFilter");
+       // chainDefinition.put("/login.jsp", "loginFilter");
+       // chainDefinition.put("/logout", "logoutFilter");
 
         // configuration for stateless authentication on each request
-        chainDefinition.put("/rest/auth/**", "restAuthenticator");
+       // chainDefinition.put("/rest/auth/**", "restAuthenticator");
 
         // make other examples not require authentication
         chainDefinition.put("/rest/**", "anon");
