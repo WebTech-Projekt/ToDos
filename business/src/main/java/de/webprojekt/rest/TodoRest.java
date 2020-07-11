@@ -100,11 +100,6 @@ public class TodoRest {
         SecurityUtils.getSubject().checkRole("admin");
         return todoRepository.findById(id)
                 .map(notes -> {
-                            if (newTodo.getUsername() != null) {
-                                User user = userRepository.findById(newTodo.getUsername())
-                                        .orElseThrow(() -> new NotFoundException(newTodo.getUsername()));
-                                notes.setUser(user);
-
                                 if (newTodo.getTitle() != null) {
                                     notes.setTitle(newTodo.getTitle());
                                 }
@@ -115,9 +110,10 @@ public class TodoRest {
                                     notes.setDeadline(newTodo.getDeadline());
                                 }
                                 if (newTodo.getUsername() != null) {
+                                    User user = userRepository.findById(newTodo.getUsername())
+                                            .orElseThrow(() -> new NotFoundException(newTodo.getUsername()));
                                     notes.setUser(user);
                                 }
-                            }
                     notes.setDone(newTodo.isDone());
                     return todoRepository.save(notes);
                 });
@@ -130,11 +126,6 @@ public class TodoRest {
        String name=subject.getPrincipal().toString();
        if(subject.hasRole("admin")) {
        Optional<Todo> response=todoRepository.findById(id).map(notes -> {
-                   if(newTodo.getUsername()!=null) {
-                       User user=userRepository.findById(newTodo.getUsername())
-                               .orElseThrow(() -> new NotFoundException(newTodo.getUsername()));
-                       notes.setUser(user);
-
                         if(newTodo.getTitle()!=null) {
                             notes.setTitle(newTodo.getTitle());
                         }
@@ -145,11 +136,11 @@ public class TodoRest {
                             notes.setDeadline(newTodo.getDeadline());
                         }
                         if(newTodo.getUsername()!=null) {
+                           User user=userRepository.findById(newTodo.getUsername())
+                                   .orElseThrow(() -> new NotFoundException(newTodo.getUsername()));
                             notes.setUser(user);
                         }
                        notes.setDone(newTodo.isDone());
-                   }
-
                     return todoRepository.save(notes);
                 });
            return new ResponseEntity<>(response, HttpStatus.OK);
