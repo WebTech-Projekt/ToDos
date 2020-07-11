@@ -1,0 +1,3 @@
+[submodule "presentation/src/main/angular"]
+	path = presentation/src/main/angular
+	url = https://github.com/WebTech-Projekt/frontend.git
