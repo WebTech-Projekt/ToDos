@@ -100,20 +100,24 @@ public class TodoRest {
         SecurityUtils.getSubject().checkRole("admin");
         return todoRepository.findById(id)
                 .map(notes -> {
-                    User user=userRepository.findById(newTodo.getUsername())
-                            .orElseThrow(() -> new NotFoundException(newTodo.getUsername()));
-                    if(newTodo.getTitle()!=null){
-                    notes.setTitle(newTodo.getTitle());
-                    }
-                    if(newTodo.getContent()!=null){
-                    notes.setContent(newTodo.getContent());
-                    }
-                    if(newTodo.getDeadline()!=null) {
-                        notes.setDeadline(newTodo.getDeadline());
-                    }
-                    if(newTodo.getUsername()!=null) {
-                        notes.setUser(user);
-                    }
+                            if (newTodo.getUsername() != null) {
+                                User user = userRepository.findById(newTodo.getUsername())
+                                        .orElseThrow(() -> new NotFoundException(newTodo.getUsername()));
+                                notes.setUser(user);
+
+                                if (newTodo.getTitle() != null) {
+                                    notes.setTitle(newTodo.getTitle());
+                                }
+                                if (newTodo.getContent() != null) {
+                                    notes.setContent(newTodo.getContent());
+                                }
+                                if (newTodo.getDeadline() != null) {
+                                    notes.setDeadline(newTodo.getDeadline());
+                                }
+                                if (newTodo.getUsername() != null) {
+                                    notes.setUser(user);
+                                }
+                            }
                     notes.setDone(newTodo.isDone());
                     return todoRepository.save(notes);
                 });
@@ -126,21 +130,26 @@ public class TodoRest {
        String name=subject.getPrincipal().toString();
        if(subject.hasRole("admin")) {
        Optional<Todo> response=todoRepository.findById(id).map(notes -> {
-                    User user=userRepository.findById(newTodo.getUsername())
-                                .orElseThrow(() -> new NotFoundException(newTodo.getUsername()));
-                    if(newTodo.getTitle()!=null) {
-                        notes.setTitle(newTodo.getTitle());
-                    }
-                    if (newTodo.getContent()!=null){
-                    notes.setContent(newTodo.getContent());
-                    }
-                    if(newTodo.getDeadline()!=null) {
-                        notes.setDeadline(newTodo.getDeadline());
-                    }
-                    if(newTodo.getUsername()!=null) {
-                        notes.setUser(user);
-                    }
-                     notes.setDone(newTodo.isDone());
+                   if(newTodo.getUsername()!=null) {
+                       User user=userRepository.findById(newTodo.getUsername())
+                               .orElseThrow(() -> new NotFoundException(newTodo.getUsername()));
+                       notes.setUser(user);
+
+                        if(newTodo.getTitle()!=null) {
+                            notes.setTitle(newTodo.getTitle());
+                        }
+                        if (newTodo.getContent()!=null){
+                        notes.setContent(newTodo.getContent());
+                        }
+                        if(newTodo.getDeadline()!=null) {
+                            notes.setDeadline(newTodo.getDeadline());
+                        }
+                        if(newTodo.getUsername()!=null) {
+                            notes.setUser(user);
+                        }
+                       notes.setDone(newTodo.isDone());
+                   }
+
                     return todoRepository.save(notes);
                 });
            return new ResponseEntity<>(response, HttpStatus.OK);
@@ -181,9 +190,9 @@ public class TodoRest {
             todoRepository.deleteById(id);
             return new ResponseEntity<>("Loeschung erfolgreich abgeschlossen", HttpStatus.OK);
         }else{
-            todoRepository.deleteByIdIfUser(id,name);
             Todo response=todoRepository.findByIdIfUser(id,name);
             if(response!=null){
+                todoRepository.deleteByIdIfUser(id,name);
                 return new ResponseEntity<>("Loeschung erfolgreich abgeschlossen", HttpStatus.OK);
             }else{
                 return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
